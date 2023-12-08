@@ -1,0 +1,23 @@
+{
+    "name": "Hello New Tab Page",
+    "description": "Uses the \"chrome_url_overrides\" manifest key by replacing the user's default new tab page with a new html file.",
+    "version": "1.0.0",
+    "incognito": "split",
+    "chrome_url_overrides": {
+        "newtab": "hello.html"
+    },
+    "manifest_version": 3,
+    "permissions": [
+        "storage",
+        "bookmarks"
+    ],
+    "icons": {
+        "16": "images/icons/icon-16.png",
+        "32": "images/icons/icon-32.png",
+        "48": "images/icons/icon-48.png",
+        "128": "images/icons/icon-128.png"
+    },
+    "action": {
+        "default_icon": "images/icons/icon-16.png"
+      }
+}
