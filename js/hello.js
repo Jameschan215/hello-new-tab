@@ -23,7 +23,10 @@ function updateDataAndDisplay() {
 const interval = 20 * 60 * 1000;
 setInterval(updateDataAndDisplay, interval);
 
-window.addEventListener('beforeunload', () => {
+window.addEventListener('beforeunload', (event) => {
+    // 显示确认对话框
+    event.preventDefault();
+    // 为了兼容处理，Chrome需要设置returnValue
+    event.returnValue = '';
     localStorage.setItem('hasRequestedAPI', '');
-})
-
+  });
