@@ -1,9 +1,4 @@
 
-const options = { method: 'GET', headers: { accept: 'application/json' } };
-const APIKEY = 'VKr26Rr8JxeIZ8gIT13dRToa2ZH8SjRc';
-const city = localStorage.getItem('location', 'hefei');
-const apiUrlWeather = `https://api.tomorrow.io/v4/weather/realtime?location=${city}&apikey=${APIKEY}`;
-
 const prettyPrintWeatherCode = (code) => {
 	const weatherCodes = {
 		0: 'Unknown',
@@ -68,28 +63,7 @@ function getIcon(weatherCode) {
 	return weatherIcons[weatherCode];
 }
 
-function getWeather() {
-  fetch(apiUrlWeather, options)
-    .then((resp) => resp.json())
-    .then((resp) => {
-      localStorage.setItem('temperature', resp.data.values.temperature);
-      localStorage.setItem('temperatureApparent',resp.data.values.temperatureApparent);
-      localStorage.setItem('humidity', resp.data.values.humidity);
-      localStorage.setItem('weatherCode', resp.data.values.weatherCode);
-    })
-    .catch((error) => console.error(error));
-}
-
-function displayWeather() {
-  const storedTemp = localStorage.getItem('temperature');
-	const storedTempAppa = localStorage.getItem('temperatureApparent');
-	const storedhumidity = localStorage.getItem('humidity');
-	const storedCode = localStorage.getItem('weatherCode');
-
-  updateData(storedTemp, storedTempAppa, storedhumidity, storedCode);
-}
-
-function updateData(temperature, temperatureApparent, humidity, weatherCode) {
+function updateData(temperature, temperatureApparent, humidity, weatherCode, city) {
 	const icon = document.querySelector('.weather-icon');
 	const temp = document.querySelector('.weather-temperature');
 	const desc = document.querySelector('.weather-description');
@@ -101,10 +75,13 @@ function updateData(temperature, temperatureApparent, humidity, weatherCode) {
 	tempAppa.innerHTML = `Feels like ${Math.round(parseFloat(temperatureApparent))}&deg;`;
 	humi.innerHTML = `Humidity ${Math.round(parseFloat(humidity))}%`;
 	desc.innerHTML = prettyPrintWeatherCode(weatherCode);
-	cityLabel.innerHTML = localStorage.getItem('location', 'Hefei');
+	cityLabel.innerHTML = city;
 
 	const img = document.createElement('img');
 	img.src = getIcon(weatherCode);
-	icon.appendChild(img);
+
+	if (!icon.contains(img)) {
+		icon.appendChild(img);
+	}
 }
 
