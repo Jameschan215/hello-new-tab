@@ -1,5 +1,5 @@
 # Hello New Tab
-#### Video Demo: 
+#### Video Demo: [Final Project Video](https://youtu.be/64Wo40PL4dc)
 #### Description: 
 The project is a chrome extension which uses the "chrome_url_overrides" manifest key by replacing the user's default new tab page with a new html file. 
 
