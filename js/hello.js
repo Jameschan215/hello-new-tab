@@ -17,7 +17,6 @@ window.addEventListener('load', async () => {
 
 function updateDataAndDisplay() {
     fetchData();
-    
 }
 
 const interval = 20 * 60 * 1000;
